@@ -1,0 +1,1 @@
+Estamos en la Universidad Industrial de Santander. Realizando un paso gigante, pues es la primera vez que usamos un desarrollo propio, de un sistema de radiocomunicaciones para realizar pruebas de radiopropagación.
