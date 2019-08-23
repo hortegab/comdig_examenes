@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Top Block
-# Generated: Wed Aug 21 05:27:02 2019
+# Generated: Thu Aug 22 05:50:20 2019
 ##################################################
 
 if __name__ == '__main__':
@@ -21,30 +21,31 @@ import sys
 sys.path.append(os.environ.get('GRC_HIER_PATH', os.path.expanduser('~/.grc_gnuradio')))
 
 from PyQt4 import Qt
-from b_Canal_AWGN import b_Canal_AWGN  # grc-generated hier_block
-from b_Eye_Diagram_c import b_Eye_Diagram_c  # grc-generated hier_block
-from b_PCM_Encoder_Bb import b_PCM_Encoder_Bb  # grc-generated hier_block
-from b_PSD_c import b_PSD_c  # grc-generated hier_block
-from b_sampler_cc import b_sampler_cc  # grc-generated hier_block
+from b_BERTool import b_BERTool  # grc-generated hier_block
 from b_u_M_PAM_bb import b_u_M_PAM_bb  # grc-generated hier_block
 from b_u_de_M_PAM_bb import b_u_de_M_PAM_bb  # grc-generated hier_block
 from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import eng_notation
-from gnuradio import filter
 from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
-from gnuradio.qtgui import Range, RangeWidget
-from grc_gnuradio import blks2 as grc_blks2
 from optparse import OptionParser
 import e_VCO_fase_fc_0
+import e_VCO_fase_fc_0_0
+import e_VCO_fase_fc_0_0_0
 import e_c_p
+import e_c_p_0
+import e_c_p_0_0
 import e_mpam_ph
+import e_mpam_ph_0
+import e_mpam_ph_0_0
 import e_phase
+import e_phase_0
+import e_phase_0_0
 import math
-import pmt
+import numpy
 import sip
 import wform  # embedded python module
 from gnuradio import qtgui
@@ -80,61 +81,26 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 390625
-        self.samp_rate_data = samp_rate_data = samp_rate
-        self.Sps = Sps = 8
-        self.M = M = 8
-        self.code1 = code1 = '010110011011101100010101011111101001001110001011010001101010001'
-        self.Rs = Rs = samp_rate_data/Sps
-        self.BpS = BpS = int(math.log(M,2))
-        self.payload = payload = 128
-        self.Rollof = Rollof = 0.5
-        self.Rb = Rb = Rs*BpS
-        self.NBpCode = NBpCode = len(code1)/8+10.
+        self.M8 = M8 = 8
+        self.M4 = M4 = 4
+        self.M2 = M2 = 2
+        self.Rb8 = Rb8 = 32000
+        self.Rb4 = Rb4 = 32000
+        self.Rb2 = Rb2 = 32000
+        self.BpS8 = BpS8 = int(math.log(M8,2))
+        self.BpS4 = BpS4 = int(math.log(M4,2))
+        self.BpS2 = BpS2 = int(math.log(M2,2))
         self.run_stop = run_stop = True
-        self.h = h = wform.rrcos(Sps,  Sps*32, Rollof)
-        self.Rbi = Rbi = Rb/(1+NBpCode/payload)
-        self.Delay_mpam = Delay_mpam = 36
-        self.Delay = Delay = 6
+        self.Rs8 = Rs8 = Rb8/BpS8
+        self.Rs4 = Rs4 = Rb4/BpS4
+        self.Rs2 = Rs2 = Rb2/BpS2
+        self.N_snr = N_snr = 128
+        self.EsN0min = EsN0min = 0.
+        self.EsN0max = EsN0max = 20.
 
         ##################################################
         # Blocks
         ##################################################
-        self.Menu = Qt.QTabWidget()
-        self.Menu_widget_0 = Qt.QWidget()
-        self.Menu_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Menu_widget_0)
-        self.Menu_grid_layout_0 = Qt.QGridLayout()
-        self.Menu_layout_0.addLayout(self.Menu_grid_layout_0)
-        self.Menu.addTab(self.Menu_widget_0, 'Info')
-        self.Menu_widget_1 = Qt.QWidget()
-        self.Menu_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Menu_widget_1)
-        self.Menu_grid_layout_1 = Qt.QGridLayout()
-        self.Menu_layout_1.addLayout(self.Menu_grid_layout_1)
-        self.Menu.addTab(self.Menu_widget_1, 'Modulacion')
-        self.Menu_widget_2 = Qt.QWidget()
-        self.Menu_layout_2 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.Menu_widget_2)
-        self.Menu_grid_layout_2 = Qt.QGridLayout()
-        self.Menu_layout_2.addLayout(self.Menu_grid_layout_2)
-        self.Menu.addTab(self.Menu_widget_2, 'Canal')
-        self.top_grid_layout.addWidget(self.Menu, 2, 0, 1, 1)
-        for r in range(2, 3):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
-        self._Delay_mpam_range = Range(0, 256, 1, 36, 200)
-        self._Delay_mpam_win = RangeWidget(self._Delay_mpam_range, self.set_Delay_mpam, 'Retraso a T3', "counter_slider", int)
-        self.Menu_grid_layout_0.addWidget(self._Delay_mpam_win, 2, 0, 1, 1)
-        for r in range(2, 3):
-            self.Menu_grid_layout_0.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.Menu_grid_layout_0.setColumnStretch(c, 1)
-        self._Delay_range = Range(0, Sps-1, 1, 6, 200)
-        self._Delay_win = RangeWidget(self._Delay_range, self.set_Delay, 'Timing (Clock Recovery)', "counter_slider", int)
-        self.top_grid_layout.addWidget(self._Delay_win, 1, 0, 1, 1)
-        for r in range(1, 2):
-            self.top_grid_layout.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.top_grid_layout.setColumnStretch(c, 1)
         _run_stop_check_box = Qt.QCheckBox('Inicial/Parar')
         self._run_stop_choices = {True: True, False: False}
         self._run_stop_choices_inv = dict((v,k) for k,v in self._run_stop_choices.iteritems())
@@ -146,174 +112,97 @@ class top_block(gr.top_block, Qt.QWidget):
             self.top_grid_layout.setRowStretch(r, 1)
         for c in range(0, 1):
             self.top_grid_layout.setColumnStretch(c, 1)
-        self.qtgui_time_sink_x_3 = qtgui.time_sink_f(
-        	1024, #size
-        	Rb, #samp_rate
-        	"", #name
-        	2 #number of inputs
+        self.qtgui_vector_sink_f_0 = qtgui.vector_sink_f(
+            N_snr,
+            EsN0min,
+            (EsN0max-EsN0min)/float(N_snr),
+            "Es/N0 [dB]",
+            "logPe",
+            "Curva de SER",
+            3 # Number of inputs
         )
-        self.qtgui_time_sink_x_3.set_update_time(0.10)
-        self.qtgui_time_sink_x_3.set_y_axis(-1, 1)
+        self.qtgui_vector_sink_f_0.set_update_time(0.10)
+        self.qtgui_vector_sink_f_0.set_y_axis(-5, 0)
+        self.qtgui_vector_sink_f_0.enable_autoscale(False)
+        self.qtgui_vector_sink_f_0.enable_grid(True)
+        self.qtgui_vector_sink_f_0.set_x_axis_units("dB")
+        self.qtgui_vector_sink_f_0.set_y_axis_units("")
+        self.qtgui_vector_sink_f_0.set_ref_level(0)
 
-        self.qtgui_time_sink_x_3.set_y_label('Amplitude', "")
-
-        self.qtgui_time_sink_x_3.enable_tags(-1, True)
-        self.qtgui_time_sink_x_3.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_3.enable_autoscale(False)
-        self.qtgui_time_sink_x_3.enable_grid(False)
-        self.qtgui_time_sink_x_3.enable_axis_labels(True)
-        self.qtgui_time_sink_x_3.enable_control_panel(False)
-        self.qtgui_time_sink_x_3.enable_stem_plot(False)
-
-        if not True:
-          self.qtgui_time_sink_x_3.disable_legend()
-
-        labels = ['T3', 'R3', '', '', '',
+        labels = ["B-PSK", "QPSK", "8PSK", "BPSK", '',
                   '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
+        widths = [6, 6, 6, 6, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
+        alphas = [1, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in xrange(2):
+        for i in xrange(3):
             if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_3.set_line_label(i, "Data {0}".format(i))
+                self.qtgui_vector_sink_f_0.set_line_label(i, "Data {0}".format(i))
             else:
-                self.qtgui_time_sink_x_3.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_3.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_3.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_3.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_3.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_3.set_line_alpha(i, alphas[i])
+                self.qtgui_vector_sink_f_0.set_line_label(i, labels[i])
+            self.qtgui_vector_sink_f_0.set_line_width(i, widths[i])
+            self.qtgui_vector_sink_f_0.set_line_color(i, colors[i])
+            self.qtgui_vector_sink_f_0.set_line_alpha(i, alphas[i])
 
-        self._qtgui_time_sink_x_3_win = sip.wrapinstance(self.qtgui_time_sink_x_3.pyqwidget(), Qt.QWidget)
-        self.Menu_grid_layout_0.addWidget(self._qtgui_time_sink_x_3_win, 1, 0, 1, 1)
-        for r in range(1, 2):
-            self.Menu_grid_layout_0.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.Menu_grid_layout_0.setColumnStretch(c, 1)
-        self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
-        	1024, #size
-        	"", #name
-        	1 #number of inputs
-        )
-        self.qtgui_const_sink_x_0.set_update_time(0.10)
-        self.qtgui_const_sink_x_0.set_y_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_x_axis(-2, 2)
-        self.qtgui_const_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, "")
-        self.qtgui_const_sink_x_0.enable_autoscale(False)
-        self.qtgui_const_sink_x_0.enable_grid(False)
-        self.qtgui_const_sink_x_0.enable_axis_labels(True)
-
-        if not True:
-          self.qtgui_const_sink_x_0.disable_legend()
-
-        labels = ['', '', '', '', '',
-                  '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "red", "red", "red",
-                  "red", "red", "red", "red", "red"]
-        styles = [0, 0, 0, 0, 0,
-                  0, 0, 0, 0, 0]
-        markers = [0, 0, 0, 0, 0,
-                   0, 0, 0, 0, 0]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(1):
-            if len(labels[i]) == 0:
-                self.qtgui_const_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_const_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_const_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_const_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_const_sink_x_0.set_line_style(i, styles[i])
-            self.qtgui_const_sink_x_0.set_line_marker(i, markers[i])
-            self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.Menu_grid_layout_1.addWidget(self._qtgui_const_sink_x_0_win, 0, 0, 1, 1)
-        for r in range(0, 1):
-            self.Menu_grid_layout_1.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.Menu_grid_layout_1.setColumnStretch(c, 1)
-        self.interp_fir_filter_xxx_1_0 = filter.interp_fir_filter_ccc(1, (h))
-        self.interp_fir_filter_xxx_1_0.declare_sample_delay(0)
-        self.interp_fir_filter_xxx_1 = filter.interp_fir_filter_ccc(Sps, (h))
-        self.interp_fir_filter_xxx_1.declare_sample_delay(0)
-        self.e_phase = e_phase.blk(M=M)
-        self.e_mpam_ph = e_mpam_ph.blk(M=M)
-        self.e_c_p = e_c_p.blk(M=M)
+        self._qtgui_vector_sink_f_0_win = sip.wrapinstance(self.qtgui_vector_sink_f_0.pyqwidget(), Qt.QWidget)
+        self.top_grid_layout.addWidget(self._qtgui_vector_sink_f_0_win)
+        self.e_phase_0_0 = e_phase_0_0.blk(M=M8)
+        self.e_phase_0 = e_phase_0.blk(M=M4)
+        self.e_phase = e_phase.blk(M=M2)
+        self.e_mpam_ph_0_0 = e_mpam_ph_0_0.blk(M=M8)
+        self.e_mpam_ph_0 = e_mpam_ph_0.blk(M=M4)
+        self.e_mpam_ph = e_mpam_ph.blk(M=M2)
+        self.e_c_p_0_0 = e_c_p_0_0.blk(M=M8)
+        self.e_c_p_0 = e_c_p_0.blk(M=M4)
+        self.e_c_p = e_c_p.blk(M=M2)
+        self.e_VCO_fase_fc_0_0_0 = e_VCO_fase_fc_0_0_0.blk()
+        self.e_VCO_fase_fc_0_0 = e_VCO_fase_fc_0_0.blk()
         self.e_VCO_fase_fc_0 = e_VCO_fase_fc_0.blk()
-        self.blocks_multiply_const_vxx_1 = blocks.multiply_const_vcc((1./Sps, ))
-        self.blocks_file_source_0 = blocks.file_source(gr.sizeof_char*1, '/home/uis-e3t/MisGits/comdig_examenes/ex3/Ex3_2019si/enviado.txt', True)
-        self.blocks_file_source_0.set_begin_tag(pmt.PMT_NIL)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, '/home/uis-e3t/MisGits/comdig_examenes/ex3/Ex3_2019si/recibido.txt', False)
-        self.blocks_file_sink_0.set_unbuffered(False)
-        self.blocks_delay_0 = blocks.delay(gr.sizeof_float*1, Delay_mpam)
-        self.blocks_char_to_float_3_0 = blocks.char_to_float(1, 1)
-        self.blocks_char_to_float_3 = blocks.char_to_float(1, 1)
-        self.blks2_packet_decoder_0 = grc_blks2.packet_demod_b(grc_blks2.packet_decoder(
-        		access_code=code1,
-        		threshold=-1,
-        		callback=lambda ok, payload: self.blks2_packet_decoder_0.recv_pkt(ok, payload),
-        	),
+        self.blocks_null_sink_0 = blocks.null_sink(gr.sizeof_char*1)
+        self.blocks_delay_0_1_0_0 = blocks.delay(gr.sizeof_char*1, 0)
+        self.blocks_delay_0_1_0 = blocks.delay(gr.sizeof_char*1, 0)
+        self.blocks_delay_0_1 = blocks.delay(gr.sizeof_char*1, 0)
+        self.b_u_de_M_PAM_bb_0_0_0 = b_u_de_M_PAM_bb(
+            M=M8,
+        )
+        self.b_u_de_M_PAM_bb_0_0 = b_u_de_M_PAM_bb(
+            M=M4,
         )
         self.b_u_de_M_PAM_bb_0 = b_u_de_M_PAM_bb(
-            M=M,
+            M=M2,
+        )
+        self.b_u_M_PAM_bb_0_0_0 = b_u_M_PAM_bb(
+            M=M8,
+        )
+        self.b_u_M_PAM_bb_0_0 = b_u_M_PAM_bb(
+            M=M4,
         )
         self.b_u_M_PAM_bb_0 = b_u_M_PAM_bb(
-            M=M,
+            M=M2,
         )
-        self.b_sampler_cc_0 = b_sampler_cc(
-            DelayDiez=Delay,
-            Sps=Sps,
+        self.b_BERTool_0_0_0_0_0 = b_BERTool(
+            EsN0max=EsN0max,
+            EsN0min=EsN0min,
+            N_snr=N_snr,
+            Rs=Rs8,
         )
-        self.b_PSD_c_0 = b_PSD_c(
-            Ensayos=1000000,
-            Fc=10000,
-            N=1024,
-            Titulo="PSD",
-            Ymax=6e-6,
-            samp_rate_audio=samp_rate_data,
+        self.b_BERTool_0_0_0_0 = b_BERTool(
+            EsN0max=EsN0max,
+            EsN0min=EsN0min,
+            N_snr=N_snr,
+            Rs=Rs4,
         )
-        self.Menu_grid_layout_2.addWidget(self.b_PSD_c_0, 1, 0, 1, 1)
-        for r in range(1, 2):
-            self.Menu_grid_layout_2.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.Menu_grid_layout_2.setColumnStretch(c, 1)
-        self.b_PCM_Encoder_Bb_0 = b_PCM_Encoder_Bb(
-            code=code1,
-            payload=payload,
+        self.b_BERTool_0_0_0 = b_BERTool(
+            EsN0max=EsN0max,
+            EsN0min=EsN0min,
+            N_snr=N_snr,
+            Rs=Rs2,
         )
-        self.b_Eye_Diagram_c_0 = b_Eye_Diagram_c(
-            AlphaLineas=0.5,
-            Delay_i=0,
-            GrosorLineas=20,
-            N_eyes=2,
-            Samprate=samp_rate_data,
-            Sps=Sps,
-            Title="Eye Diagramm",
-            Ymax=2,
-            Ymin=-2,
-        )
-        self.Menu_grid_layout_2.addWidget(self.b_Eye_Diagram_c_0, 0, 0, 1, 1)
-        for r in range(0, 1):
-            self.Menu_grid_layout_2.setRowStretch(r, 1)
-        for c in range(0, 1):
-            self.Menu_grid_layout_2.setColumnStretch(c, 1)
-        self.b_Canal_AWGN_0 = b_Canal_AWGN(
-            BW=samp_rate_data/2,
-            Ch_NodB=-65,
-            Ch_Toffset=0,
-            samp_rate=samp_rate_data,
-        )
+        self.analog_random_source_x_0 = blocks.vector_source_b(map(int, numpy.random.randint(0, 2, 1000000)), True)
+        self.analog_const_source_x_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 1.)
+        self.analog_const_source_x_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 1.)
         self.analog_const_source_x_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 1.)
 
 
@@ -322,127 +211,127 @@ class top_block(gr.top_block, Qt.QWidget):
         # Connections
         ##################################################
         self.connect((self.analog_const_source_x_0, 0), (self.e_VCO_fase_fc_0, 1))
-        self.connect((self.b_Canal_AWGN_0, 0), (self.interp_fir_filter_xxx_1_0, 0))
-        self.connect((self.b_PCM_Encoder_Bb_0, 0), (self.b_u_M_PAM_bb_0, 0))
-        self.connect((self.b_sampler_cc_0, 0), (self.b_Eye_Diagram_c_0, 1))
-        self.connect((self.b_sampler_cc_0, 1), (self.e_c_p, 0))
-        self.connect((self.b_sampler_cc_0, 1), (self.qtgui_const_sink_x_0, 0))
-        self.connect((self.b_u_M_PAM_bb_0, 0), (self.blocks_char_to_float_3, 0))
+        self.connect((self.analog_const_source_x_0_0, 0), (self.e_VCO_fase_fc_0_0, 1))
+        self.connect((self.analog_const_source_x_0_0_0, 0), (self.e_VCO_fase_fc_0_0_0, 1))
+        self.connect((self.analog_random_source_x_0, 0), (self.b_u_M_PAM_bb_0, 0))
+        self.connect((self.analog_random_source_x_0, 0), (self.b_u_M_PAM_bb_0_0, 0))
+        self.connect((self.analog_random_source_x_0, 0), (self.b_u_M_PAM_bb_0_0_0, 0))
+        self.connect((self.b_BERTool_0_0_0, 0), (self.e_c_p, 0))
+        self.connect((self.b_BERTool_0_0_0, 1), (self.qtgui_vector_sink_f_0, 0))
+        self.connect((self.b_BERTool_0_0_0_0, 0), (self.e_c_p_0, 0))
+        self.connect((self.b_BERTool_0_0_0_0, 1), (self.qtgui_vector_sink_f_0, 1))
+        self.connect((self.b_BERTool_0_0_0_0_0, 0), (self.e_c_p_0_0, 0))
+        self.connect((self.b_BERTool_0_0_0_0_0, 1), (self.qtgui_vector_sink_f_0, 2))
+        self.connect((self.b_u_M_PAM_bb_0, 0), (self.blocks_delay_0_1, 0))
         self.connect((self.b_u_M_PAM_bb_0, 0), (self.e_mpam_ph, 0))
-        self.connect((self.b_u_de_M_PAM_bb_0, 0), (self.blks2_packet_decoder_0, 0))
-        self.connect((self.blks2_packet_decoder_0, 0), (self.blocks_file_sink_0, 0))
-        self.connect((self.blocks_char_to_float_3, 0), (self.blocks_delay_0, 0))
-        self.connect((self.blocks_char_to_float_3_0, 0), (self.qtgui_time_sink_x_3, 1))
-        self.connect((self.blocks_delay_0, 0), (self.qtgui_time_sink_x_3, 0))
-        self.connect((self.blocks_file_source_0, 0), (self.b_PCM_Encoder_Bb_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_1, 0), (self.b_Eye_Diagram_c_0, 0))
-        self.connect((self.blocks_multiply_const_vxx_1, 0), (self.b_sampler_cc_0, 0))
-        self.connect((self.e_VCO_fase_fc_0, 0), (self.interp_fir_filter_xxx_1, 0))
+        self.connect((self.b_u_M_PAM_bb_0_0, 0), (self.blocks_delay_0_1_0, 0))
+        self.connect((self.b_u_M_PAM_bb_0_0, 0), (self.e_mpam_ph_0, 0))
+        self.connect((self.b_u_M_PAM_bb_0_0_0, 0), (self.blocks_delay_0_1_0_0, 0))
+        self.connect((self.b_u_M_PAM_bb_0_0_0, 0), (self.e_mpam_ph_0_0, 0))
+        self.connect((self.b_u_de_M_PAM_bb_0, 0), (self.blocks_null_sink_0, 2))
+        self.connect((self.b_u_de_M_PAM_bb_0_0, 0), (self.blocks_null_sink_0, 1))
+        self.connect((self.b_u_de_M_PAM_bb_0_0_0, 0), (self.blocks_null_sink_0, 0))
+        self.connect((self.blocks_delay_0_1, 0), (self.b_BERTool_0_0_0, 1))
+        self.connect((self.blocks_delay_0_1_0, 0), (self.b_BERTool_0_0_0_0, 1))
+        self.connect((self.blocks_delay_0_1_0_0, 0), (self.b_BERTool_0_0_0_0_0, 1))
+        self.connect((self.e_VCO_fase_fc_0, 0), (self.b_BERTool_0_0_0, 0))
+        self.connect((self.e_VCO_fase_fc_0_0, 0), (self.b_BERTool_0_0_0_0, 0))
+        self.connect((self.e_VCO_fase_fc_0_0_0, 0), (self.b_BERTool_0_0_0_0_0, 0))
         self.connect((self.e_c_p, 0), (self.e_phase, 0))
+        self.connect((self.e_c_p_0, 0), (self.e_phase_0, 0))
+        self.connect((self.e_c_p_0_0, 0), (self.e_phase_0_0, 0))
         self.connect((self.e_mpam_ph, 0), (self.e_VCO_fase_fc_0, 0))
+        self.connect((self.e_mpam_ph_0, 0), (self.e_VCO_fase_fc_0_0, 0))
+        self.connect((self.e_mpam_ph_0_0, 0), (self.e_VCO_fase_fc_0_0_0, 0))
+        self.connect((self.e_phase, 0), (self.b_BERTool_0_0_0, 2))
         self.connect((self.e_phase, 0), (self.b_u_de_M_PAM_bb_0, 0))
-        self.connect((self.e_phase, 0), (self.blocks_char_to_float_3_0, 0))
-        self.connect((self.interp_fir_filter_xxx_1, 0), (self.b_Canal_AWGN_0, 0))
-        self.connect((self.interp_fir_filter_xxx_1, 0), (self.b_PSD_c_0, 0))
-        self.connect((self.interp_fir_filter_xxx_1_0, 0), (self.blocks_multiply_const_vxx_1, 0))
+        self.connect((self.e_phase_0, 0), (self.b_BERTool_0_0_0_0, 2))
+        self.connect((self.e_phase_0, 0), (self.b_u_de_M_PAM_bb_0_0, 0))
+        self.connect((self.e_phase_0_0, 0), (self.b_BERTool_0_0_0_0_0, 2))
+        self.connect((self.e_phase_0_0, 0), (self.b_u_de_M_PAM_bb_0_0_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
-    def get_samp_rate(self):
-        return self.samp_rate
+    def get_M8(self):
+        return self.M8
 
-    def set_samp_rate(self, samp_rate):
-        self.samp_rate = samp_rate
-        self.set_samp_rate_data(self.samp_rate)
+    def set_M8(self, M8):
+        self.M8 = M8
+        self.e_phase_0_0.M = self.M8
+        self.e_mpam_ph_0_0.M = self.M8
+        self.e_c_p_0_0.M = self.M8
+        self.b_u_de_M_PAM_bb_0_0_0.set_M(self.M8)
+        self.b_u_M_PAM_bb_0_0_0.set_M(self.M8)
+        self.set_BpS8(int(math.log(self.M8,2)))
 
-    def get_samp_rate_data(self):
-        return self.samp_rate_data
+    def get_M4(self):
+        return self.M4
 
-    def set_samp_rate_data(self, samp_rate_data):
-        self.samp_rate_data = samp_rate_data
-        self.b_PSD_c_0.set_samp_rate_audio(self.samp_rate_data)
-        self.b_Eye_Diagram_c_0.set_Samprate(self.samp_rate_data)
-        self.b_Canal_AWGN_0.set_BW(self.samp_rate_data/2)
-        self.b_Canal_AWGN_0.set_samp_rate(self.samp_rate_data)
-        self.set_Rs(self.samp_rate_data/self.Sps)
+    def set_M4(self, M4):
+        self.M4 = M4
+        self.e_phase_0.M = self.M4
+        self.e_mpam_ph_0.M = self.M4
+        self.e_c_p_0.M = self.M4
+        self.b_u_de_M_PAM_bb_0_0.set_M(self.M4)
+        self.b_u_M_PAM_bb_0_0.set_M(self.M4)
+        self.set_BpS4(int(math.log(self.M4,2)))
 
-    def get_Sps(self):
-        return self.Sps
+    def get_M2(self):
+        return self.M2
 
-    def set_Sps(self, Sps):
-        self.Sps = Sps
-        self.set_h(wform.rrcos(self.Sps,  self.Sps*32, self.Rollof))
-        self.blocks_multiply_const_vxx_1.set_k((1./self.Sps, ))
-        self.b_sampler_cc_0.set_Sps(self.Sps)
-        self.b_Eye_Diagram_c_0.set_Sps(self.Sps)
-        self.set_Rs(self.samp_rate_data/self.Sps)
+    def set_M2(self, M2):
+        self.M2 = M2
+        self.e_phase.M = self.M2
+        self.e_mpam_ph.M = self.M2
+        self.e_c_p.M = self.M2
+        self.b_u_de_M_PAM_bb_0.set_M(self.M2)
+        self.b_u_M_PAM_bb_0.set_M(self.M2)
+        self.set_BpS2(int(math.log(self.M2,2)))
 
-    def get_M(self):
-        return self.M
+    def get_Rb8(self):
+        return self.Rb8
 
-    def set_M(self, M):
-        self.M = M
-        self.e_phase.M = self.M
-        self.e_mpam_ph.M = self.M
-        self.e_c_p.M = self.M
-        self.b_u_de_M_PAM_bb_0.set_M(self.M)
-        self.b_u_M_PAM_bb_0.set_M(self.M)
-        self.set_BpS(int(math.log(self.M,2)))
+    def set_Rb8(self, Rb8):
+        self.Rb8 = Rb8
+        self.set_Rs8(self.Rb8/self.BpS8)
 
-    def get_code1(self):
-        return self.code1
+    def get_Rb4(self):
+        return self.Rb4
 
-    def set_code1(self, code1):
-        self.code1 = code1
-        self.b_PCM_Encoder_Bb_0.set_code(self.code1)
-        self.set_NBpCode(len(self.code1)/8+10.)
+    def set_Rb4(self, Rb4):
+        self.Rb4 = Rb4
+        self.set_Rs4(self.Rb4/self.BpS4)
 
-    def get_Rs(self):
-        return self.Rs
+    def get_Rb2(self):
+        return self.Rb2
 
-    def set_Rs(self, Rs):
-        self.Rs = Rs
-        self.set_Rb(self.Rs*self.BpS)
+    def set_Rb2(self, Rb2):
+        self.Rb2 = Rb2
+        self.set_Rs2(self.Rb2/self.BpS2)
 
-    def get_BpS(self):
-        return self.BpS
+    def get_BpS8(self):
+        return self.BpS8
 
-    def set_BpS(self, BpS):
-        self.BpS = BpS
-        self.set_Rb(self.Rs*self.BpS)
+    def set_BpS8(self, BpS8):
+        self.BpS8 = BpS8
+        self.set_Rs8(self.Rb8/self.BpS8)
 
-    def get_payload(self):
-        return self.payload
+    def get_BpS4(self):
+        return self.BpS4
 
-    def set_payload(self, payload):
-        self.payload = payload
-        self.b_PCM_Encoder_Bb_0.set_payload(self.payload)
-        self.set_Rbi(self.Rb/(1+self.NBpCode/self.payload))
+    def set_BpS4(self, BpS4):
+        self.BpS4 = BpS4
+        self.set_Rs4(self.Rb4/self.BpS4)
 
-    def get_Rollof(self):
-        return self.Rollof
+    def get_BpS2(self):
+        return self.BpS2
 
-    def set_Rollof(self, Rollof):
-        self.Rollof = Rollof
-        self.set_h(wform.rrcos(self.Sps,  self.Sps*32, self.Rollof))
-
-    def get_Rb(self):
-        return self.Rb
-
-    def set_Rb(self, Rb):
-        self.Rb = Rb
-        self.qtgui_time_sink_x_3.set_samp_rate(self.Rb)
-        self.set_Rbi(self.Rb/(1+self.NBpCode/self.payload))
-
-    def get_NBpCode(self):
-        return self.NBpCode
-
-    def set_NBpCode(self, NBpCode):
-        self.NBpCode = NBpCode
-        self.set_Rbi(self.Rb/(1+self.NBpCode/self.payload))
+    def set_BpS2(self, BpS2):
+        self.BpS2 = BpS2
+        self.set_Rs2(self.Rb2/self.BpS2)
 
     def get_run_stop(self):
         return self.run_stop
@@ -453,33 +342,56 @@ class top_block(gr.top_block, Qt.QWidget):
         else: self.stop(); self.wait()
         self._run_stop_callback(self.run_stop)
 
-    def get_h(self):
-        return self.h
+    def get_Rs8(self):
+        return self.Rs8
 
-    def set_h(self, h):
-        self.h = h
-        self.interp_fir_filter_xxx_1_0.set_taps((self.h))
-        self.interp_fir_filter_xxx_1.set_taps((self.h))
+    def set_Rs8(self, Rs8):
+        self.Rs8 = Rs8
+        self.b_BERTool_0_0_0_0_0.set_Rs(self.Rs8)
 
-    def get_Rbi(self):
-        return self.Rbi
+    def get_Rs4(self):
+        return self.Rs4
 
-    def set_Rbi(self, Rbi):
-        self.Rbi = Rbi
+    def set_Rs4(self, Rs4):
+        self.Rs4 = Rs4
+        self.b_BERTool_0_0_0_0.set_Rs(self.Rs4)
 
-    def get_Delay_mpam(self):
-        return self.Delay_mpam
+    def get_Rs2(self):
+        return self.Rs2
 
-    def set_Delay_mpam(self, Delay_mpam):
-        self.Delay_mpam = Delay_mpam
-        self.blocks_delay_0.set_dly(self.Delay_mpam)
+    def set_Rs2(self, Rs2):
+        self.Rs2 = Rs2
+        self.b_BERTool_0_0_0.set_Rs(self.Rs2)
 
-    def get_Delay(self):
-        return self.Delay
+    def get_N_snr(self):
+        return self.N_snr
 
-    def set_Delay(self, Delay):
-        self.Delay = Delay
-        self.b_sampler_cc_0.set_DelayDiez(self.Delay)
+    def set_N_snr(self, N_snr):
+        self.N_snr = N_snr
+        self.qtgui_vector_sink_f_0.set_x_axis(self.EsN0min, (self.EsN0max-self.EsN0min)/float(self.N_snr))
+        self.b_BERTool_0_0_0_0_0.set_N_snr(self.N_snr)
+        self.b_BERTool_0_0_0_0.set_N_snr(self.N_snr)
+        self.b_BERTool_0_0_0.set_N_snr(self.N_snr)
+
+    def get_EsN0min(self):
+        return self.EsN0min
+
+    def set_EsN0min(self, EsN0min):
+        self.EsN0min = EsN0min
+        self.qtgui_vector_sink_f_0.set_x_axis(self.EsN0min, (self.EsN0max-self.EsN0min)/float(self.N_snr))
+        self.b_BERTool_0_0_0_0_0.set_EsN0min(self.EsN0min)
+        self.b_BERTool_0_0_0_0.set_EsN0min(self.EsN0min)
+        self.b_BERTool_0_0_0.set_EsN0min(self.EsN0min)
+
+    def get_EsN0max(self):
+        return self.EsN0max
+
+    def set_EsN0max(self, EsN0max):
+        self.EsN0max = EsN0max
+        self.qtgui_vector_sink_f_0.set_x_axis(self.EsN0min, (self.EsN0max-self.EsN0min)/float(self.N_snr))
+        self.b_BERTool_0_0_0_0_0.set_EsN0max(self.EsN0max)
+        self.b_BERTool_0_0_0_0.set_EsN0max(self.EsN0max)
+        self.b_BERTool_0_0_0.set_EsN0max(self.EsN0max)
 
 
 def main(top_block_cls=top_block, options=None):
