@@ -1,0 +1,1079 @@
+options:
+  parameters:
+    author: ''
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: top_block
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: run_stop
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ''
+    window_size: (3000,3000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [167, 29]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: B
+  id: variable
+  parameters:
+    comment: ''
+    value: N*F_Resolucion
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [112, 155]
+    rotation: 0
+    state: enabled
+- name: BW
+  id: variable
+  parameters:
+    comment: ''
+    value: Fmax
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [387, 157]
+    rotation: 0
+    state: enabled
+- name: Channel_BW
+  id: variable
+  parameters:
+    comment: ''
+    value: Fmax
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [480, 156]
+    rotation: 0
+    state: enabled
+- name: Channel_BW_P4
+  id: variable
+  parameters:
+    comment: ''
+    value: W
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 549]
+    rotation: 0
+    state: enabled
+- name: F_Resolucion
+  id: variable
+  parameters:
+    comment: ''
+    value: '200000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [818, 35]
+    rotation: 0
+    state: enabled
+- name: Fmax
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate/2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [294, 155]
+    rotation: 0
+    state: enabled
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '256'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [738, 35]
+    rotation: 0
+    state: enabled
+- name: Nlobf
+  id: variable
+  parameters:
+    comment: ''
+    value: '8'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [660, 34]
+    rotation: 0
+    state: enabled
+- name: No_dB
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,4,1,1
+    label: No (dB)
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: float
+    start: '-300'
+    step: 300/100.
+    stop: '0'
+    value: '-300'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [316, 1104]
+    rotation: 0
+    state: enabled
+- name: Rb
+  id: variable
+  parameters:
+    comment: ''
+    value: B/Nlobf
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [129, 266]
+    rotation: 0
+    state: enabled
+- name: Retardo_Timing
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,3,1,1
+    label: Timing
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: Sps-1
+    value: '4'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [797, 1101]
+    rotation: 0
+    state: enabled
+- name: Retardo_ojo
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,1,1,1
+    label: Center the Eye by a delay
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: Sps*2
+    value: '4'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [442, 1107]
+    rotation: 0
+    state: enabled
+- name: Retardo_ojo_t
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 0,2,1,1
+    label: Center the Eye-Timing Diagramm
+    min_len: '200'
+    orient: Qt.Horizontal
+    rangeType: int
+    start: '0'
+    step: '1'
+    stop: Sps*2
+    value: '0'
+    widget: counter
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [611, 1102]
+    rotation: 0
+    state: enabled
+- name: Sps
+  id: variable
+  parameters:
+    comment: ''
+    value: int(samp_rate/Rb)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [224, 267]
+    rotation: 0
+    state: enabled
+- name: W
+  id: variable
+  parameters:
+    comment: ''
+    value: Rb/2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [120, 547]
+    rotation: 0
+    state: enabled
+- name: bits_afectados_por_ISI
+  id: variable
+  parameters:
+    comment: ''
+    value: int(ntaps/Sps)-1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [434, 365]
+    rotation: 0
+    state: enabled
+- name: h
+  id: variable
+  parameters:
+    comment: ''
+    value: wform.rect(Sps)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [191, 364]
+    rotation: 0
+    state: enabled
+- name: ntaps
+  id: variable
+  parameters:
+    comment: ''
+    value: Sps*1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [348, 364]
+    rotation: 0
+    state: enabled
+- name: run_stop
+  id: variable_qtgui_check_box
+  parameters:
+    comment: ''
+    'false': 'False'
+    gui_hint: 0,0,1,1
+    label: Pause
+    'true': 'True'
+    type: int
+    value: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [26, 1102]
+    rotation: 180
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: B
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [201, 157]
+    rotation: 0
+    state: enabled
+- name: samp_rate_16
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate/16
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [213, 548]
+    rotation: 0
+    state: enabled
+- name: samp_rate_T4
+  id: variable
+  parameters:
+    comment: ''
+    value: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [591, 153]
+    rotation: 0
+    state: enabled
+- name: E3TRadio_bipolar_decisor_ff_0
+  id: E3TRadio_bipolar_decisor_ff
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [321, 1022]
+    rotation: 180
+    state: true
+- name: E3TRadio_diezma_ff_0
+  id: E3TRadio_diezma_ff
+  parameters:
+    M: '2'
+    N: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [520, 1008]
+    rotation: 180
+    state: enabled
+- name: analog_const_source_x_0_2_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: samp_rate_T4/1e6
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [794, 167]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_0_2_0_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [786, 277]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_0_2_0_0_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: bits_afectados_por_ISI
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [788, 383]
+    rotation: 0
+    state: enabled
+- name: b_Canal_AWGN_ff_0
+  id: b_Canal_AWGN_ff
+  parameters:
+    BW: Channel_BW
+    Ch_NodB: No_dB
+    Ch_Toffset: '0'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [645, 834]
+    rotation: 270
+    state: enabled
+- name: b_Canal_AWGN_ff_0_0
+  id: b_Canal_AWGN_ff
+  parameters:
+    BW: Channel_BW_P4
+    Ch_NodB: No_dB
+    Ch_Toffset: '0'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [644, 534]
+    rotation: 0
+    state: enabled
+- name: b_Eye_Diagram_simple_f_0
+  id: b_Eye_Diagram_simple_f
+  parameters:
+    AlphaLineas: '0.5'
+    Delay_i: Retardo_ojo_t
+    GrosorLineas: '20'
+    N_eyes: '2'
+    Samprate: samp_rate
+    Sps: Sps
+    Title: '"Diagrama de ojo en R4 modificado"'
+    Ymax: '2'
+    Ymin: '-2'
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: menu@4:0,0,1,1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1188, 503]
+    rotation: 0
+    state: true
+- name: b_PSD_0_0_0
+  id: b_PSD
+  parameters:
+    Ensayos: '1000000'
+    N: '1024'
+    Titulo: '''PSD in  R4'''
+    Ymax: 1e-5
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: menu@0:3,0,1,1
+    samp_rate_audio: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1060, 11]
+    rotation: 0
+    state: enabled
+- name: b_PSD_0_0_0_0
+  id: b_PSD
+  parameters:
+    Ensayos: '1000000'
+    N: '1024'
+    Titulo: '''PSD in  R4 modificado'''
+    Ymax: 1e-5
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: menu@5:3,0,1,1
+    samp_rate_audio: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1004, 711]
+    rotation: 0
+    state: enabled
+- name: b_PSD_advanced_0
+  id: b_PSD_advanced
+  parameters:
+    Ensayos: '1000000'
+    Resolution: 0.5e6
+    Titulo: '''espectro'''
+    Ymax: 1e-5
+    affinity: ''
+    alias: ''
+    comment: ''
+    gui_hint: menu@5:4,0,1,1
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1051, 836]
+    rotation: 0
+    state: true
+- name: b_binary_bipolar_source1_f_0
+  id: b_binary_bipolar_source1_f
+  parameters:
+    Am: '1.'
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [26, 780]
+    rotation: 0
+    state: enabled
+- name: b_eye_diagram2_f_0
+  id: b_eye_diagram2_f
+  parameters:
+    Delay: '0'
+    Nvol: '10000'
+    Sps: Sps
+    affinity: ''
+    alias: ''
+    comment: ''
+    samp_rate: samp_rate
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [979, 490]
+    rotation: 0
+    state: true
+- name: blocks_null_sink_0
+  id: blocks_null_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    bus_structure_sink: '[[0,],]'
+    comment: ''
+    num_inputs: '1'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [27, 1022]
+    rotation: 180
+    state: enabled
+- name: import_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import math
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [435, 35]
+    rotation: 0
+    state: enabled
+- name: import_0_0
+  id: import
+  parameters:
+    alias: ''
+    comment: ''
+    imports: import numpy
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [332, 36]
+    rotation: 0
+    state: enabled
+- name: interp_fir_filter_xxx_0
+  id: interp_fir_filter_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    interp: Sps
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    samp_delay: '0'
+    taps: h
+    type: fff
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [326, 772]
+    rotation: 0
+    state: enabled
+- name: menu
+  id: qtgui_tab_widget
+  parameters:
+    alias: ''
+    comment: ''
+    gui_hint: 2,0,1,6
+    label0: Datos de Entrada
+    label1: P1
+    label10: Tab 10
+    label11: Tab 11
+    label12: Tab 12
+    label13: Tab 13
+    label14: Tab 14
+    label15: Tab 15
+    label16: Tab 16
+    label17: Tab 17
+    label18: Tab 18
+    label19: Tab 19
+    label2: P2
+    label3: P3
+    label4: P4a
+    label5: P4b
+    label6: Tab 6
+    label7: Tab 7
+    label8: Tab 8
+    label9: Tab 9
+    num_tabs: '6'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [161, 1102]
+    rotation: 0
+    state: enabled
+- name: note_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: Datos de entrada
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [20, 33]
+    rotation: 0
+    state: true
+- name: note_0_0_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: P1
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [18, 161]
+    rotation: 0
+    state: true
+- name: note_0_0_0_2
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: P2
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [20, 267]
+    rotation: 0
+    state: true
+- name: note_0_0_0_2_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: P3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [17, 369]
+    rotation: 0
+    state: true
+- name: note_0_0_0_2_0_0
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: P4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [15, 550]
+    rotation: 0
+    state: true
+- name: qtgui_number_sink_0_2_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_VERT
+    gui_hint: menu@1:0,0,1,1
+    label1: samp_rate
+    label10: ''
+    label2: Fmax
+    label3: F_resolucion
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"Muestras por segundo en T4"'
+    nconnections: '1'
+    type: float
+    unit1: MHz
+    unit10: ''
+    unit2: Hz
+    unit3: Hz
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [957, 144]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0_2_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_VERT
+    gui_hint: menu@2:0,0,1,1
+    label1: Sps
+    label10: ''
+    label2: Fmax
+    label3: F_resolucion
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"Muestras por bit en T4"'
+    nconnections: '1'
+    type: float
+    unit1: muestras por bit
+    unit10: ''
+    unit2: Hz
+    unit3: Hz
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [960, 254]
+    rotation: 0
+    state: enabled
+- name: qtgui_number_sink_0_2_0_0_0
+  id: qtgui_number_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    autoscale: 'False'
+    avg: '0'
+    color1: ("black", "black")
+    color10: ("black", "black")
+    color2: ("black", "black")
+    color3: ("black", "black")
+    color4: ("black", "black")
+    color5: ("black", "black")
+    color6: ("black", "black")
+    color7: ("black", "black")
+    color8: ("black", "black")
+    color9: ("black", "black")
+    comment: ''
+    factor1: '1'
+    factor10: '1'
+    factor2: '1'
+    factor3: '1'
+    factor4: '1'
+    factor5: '1'
+    factor6: '1'
+    factor7: '1'
+    factor8: '1'
+    factor9: '1'
+    graph_type: qtgui.NUM_GRAPH_VERT
+    gui_hint: menu@3:0,0,1,1
+    label1: bits_afectados_por_ISI
+    label10: ''
+    label2: Fmax
+    label3: F_resolucion
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    max: '1'
+    min: '-1'
+    name: '"bits afectados por ISI"'
+    nconnections: '1'
+    type: float
+    unit1: bits
+    unit10: ''
+    unit2: Hz
+    unit3: Hz
+    unit4: ''
+    unit5: ''
+    unit6: ''
+    unit7: ''
+    unit8: ''
+    unit9: ''
+    update_time: '0.10'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [969, 359]
+    rotation: 0
+    state: enabled
+- name: vs_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: T4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [532, 861]
+    rotation: 270
+    state: enabled
+- name: vs_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: R4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [576, 885]
+    rotation: 90
+    state: enabled
+- name: vs_0_0_0
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: R4_m
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [840, 634]
+    rotation: 270
+    state: enabled
+- name: vs_0_0_1
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: R3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [246, 879]
+    rotation: 90
+    state: enabled
+- name: vs_0_2
+  id: virtual_sink
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: T3
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [201, 873]
+    rotation: 270
+    state: enabled
+- name: vso_0_1_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: R4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [937, 42]
+    rotation: 0
+    state: enabled
+- name: vso_0_1_0_0_0
+  id: virtual_source
+  parameters:
+    alias: ''
+    comment: ''
+    stream_id: T4
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [507, 557]
+    rotation: 0
+    state: enabled
+- name: wform
+  id: epy_module
+  parameters:
+    alias: ''
+    comment: ''
+    source_code: "import math\nimport numpy\n#######################################################\n\
+      ##        Hecho por Homero Ortega Boada              ##\n##        comdiguis@saber.uis.edu.co\
+      \                 ##\n##     Universidad Industrial de Santander           ##\n\
+      #######################################################\n\n#######################################################\n\
+      ##               Forma rectangular                   ##\n#######################################################\
+      \                       \ndef rect(Sps):\n    return Sps*[1.,]\n\n#######################################################\n\
+      ##               Forma de Nyquist                    ##\n#######################################################\
+      \                       \ndef nyq(Sps,ntaps):\n    n=numpy.linspace(-int(ntaps/2),\
+      \ int(ntaps/2-1),ntaps)\n    h=numpy.sinc(n/Sps)\n#    return h/numpy.amax(h)\n\
+      \    return h\n#######################################################\n## \
+      \              Forma Coseno Alzado                 ##\n#######################################################\
+      \                       \ndef rcos(Sps,ntaps,beta):\n    if beta==0:\n     \
+      \   h=nyq(Sps,ntaps)\n    else:\n        h=ntaps*[0,]\n        for n in range(ntaps):\n\
+      \            k=n-ntaps/2. # esto es para que h[n] quede centrada en la mitad\
+      \ del vector\n            if abs(k)==Sps/(2.*beta):\n                h[n]=numpy.sinc(1./(2.*beta))*math.pi/4.\n\
+      \            else:\n                h[n]=numpy.sinc(k/Sps)*math.cos(beta*k*math.pi/Sps)/(1.-(2.*beta*k/Sps)**2)\
+      \                \n    Amp=numpy.amax(h)\n    return h/Amp\n#######################################################\n\
+      ##            Forma Raiz de Coseno Alzado            ##\n#######################################################\
+      \                       \n\ndef rrcos(Sps,ntaps,beta):\n    if beta==0:\n  \
+      \      h=nyq(Sps,ntaps)\n    else:\n        h=ntaps*[0,]\n        beta4=4.*beta\n\
+      \        for n in range(ntaps):\n            k=n-ntaps/2. # esto es para que\
+      \ h[n] quede centrada en la mitad del vector\n            if k==0:\n       \
+      \         h[n]=1+beta*(4./math.pi-1.)\n            elif abs(k)==Sps/beta4:\n\
+      \                ha=(1.+2./math.pi)*math.sin(math.pi/beta4)\n              \
+      \  hb=(1.-2./math.pi)*math.cos(math.pi/beta4)\n                h[n]=(ha+hb)*beta/math.sqrt(2.)\n\
+      \            else:\n                ks=k/Sps\n                kspi=math.pi*ks\n\
+      \                Num=math.sin(kspi*(1-beta))+beta4*ks*math.cos(kspi*(1+beta))\n\
+      \                Den=kspi*(1.-(beta4*ks)**2)\n                h[n]=Num/Den \
+      \               \n    Amp=numpy.amax(h)\n    return h/Amp\n"
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [537, 38]
+    rotation: 0
+    state: enabled
+
+connections:
+- [E3TRadio_bipolar_decisor_ff_0, '0', blocks_null_sink_0, '0']
+- [E3TRadio_bipolar_decisor_ff_0, '0', vs_0_0_1, '0']
+- [E3TRadio_diezma_ff_0, '0', E3TRadio_bipolar_decisor_ff_0, '0']
+- [analog_const_source_x_0_2_0, '0', qtgui_number_sink_0_2_0, '0']
+- [analog_const_source_x_0_2_0_0, '0', qtgui_number_sink_0_2_0_0, '0']
+- [analog_const_source_x_0_2_0_0_0, '0', qtgui_number_sink_0_2_0_0_0, '0']
+- [b_Canal_AWGN_ff_0, '0', E3TRadio_diezma_ff_0, '0']
+- [b_Canal_AWGN_ff_0, '0', vs_0_0, '0']
+- [b_Canal_AWGN_ff_0_0, '0', b_Eye_Diagram_simple_f_0, '0']
+- [b_Canal_AWGN_ff_0_0, '0', b_PSD_0_0_0_0, '0']
+- [b_Canal_AWGN_ff_0_0, '0', b_PSD_advanced_0, '0']
+- [b_Canal_AWGN_ff_0_0, '0', b_eye_diagram2_f_0, '0']
+- [b_Canal_AWGN_ff_0_0, '0', vs_0_0_0, '0']
+- [b_binary_bipolar_source1_f_0, '0', interp_fir_filter_xxx_0, '0']
+- [b_binary_bipolar_source1_f_0, '0', vs_0_2, '0']
+- [interp_fir_filter_xxx_0, '0', b_Canal_AWGN_ff_0, '0']
+- [interp_fir_filter_xxx_0, '0', vs_0, '0']
+- [vso_0_1_0, '0', b_PSD_0_0_0, '0']
+- [vso_0_1_0_0_0, '0', b_Canal_AWGN_ff_0_0, '0']
+
+metadata:
+  file_format: 1

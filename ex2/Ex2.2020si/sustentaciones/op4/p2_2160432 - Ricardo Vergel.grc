@@ -99,7 +99,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: Rb*2
+    value: '400'
   states:
     bus_sink: false
     bus_source: false
@@ -131,7 +131,7 @@ blocks:
     start: -2.*math.pi
     step: (4.*math.pi)/360.
     stop: 2.*math.pi
-    value: '0.'
+    value: math.pi
     widget: counter_slider
   states:
     bus_sink: false
@@ -221,7 +221,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '3200'
+    value: '4800'
   states:
     bus_sink: false
     bus_source: false
@@ -271,7 +271,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [146, 399]
+    coordinate: [146, 394]
     rotation: 0
     state: enabled
 - name: analog_const_source_x_0_0_0
@@ -348,7 +348,7 @@ blocks:
     bus_structure: null
     coordinate: [257, 618]
     rotation: 0
-    state: disabled
+    state: true
 - name: b_upconverter_cf_0
   id: b_upconverter_cf
   parameters:
@@ -423,7 +423,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: Kf*2*math.pi/samp_rate
+    const: -Kf*2*math.pi/samp_rate
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
@@ -483,7 +483,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [722, 372]
+    coordinate: [705, 372]
     rotation: 0
     state: enabled
 - name: epy_block_0
@@ -564,190 +564,6 @@ blocks:
     coordinate: [23, 25]
     rotation: 0
     state: true
-- name: qtgui_const_sink_x_0
-  id: qtgui_const_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: '"blue"'
-    color10: '"red"'
-    color2: '"red"'
-    color3: '"red"'
-    color4: '"red"'
-    color5: '"red"'
-    color6: '"red"'
-    color7: '"red"'
-    color8: '"red"'
-    color9: '"red"'
-    comment: ''
-    grid: 'False'
-    gui_hint: 4,0,1,1
-    label1: ''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    legend: 'True'
-    marker1: '0'
-    marker10: '0'
-    marker2: '0'
-    marker3: '0'
-    marker4: '0'
-    marker5: '0'
-    marker6: '0'
-    marker7: '0'
-    marker8: '0'
-    marker9: '0'
-    name: '""'
-    nconnections: '1'
-    size: '1024'
-    style1: '0'
-    style10: '0'
-    style2: '0'
-    style3: '0'
-    style4: '0'
-    style5: '0'
-    style6: '0'
-    style7: '0'
-    style8: '0'
-    style9: '0'
-    tr_chan: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: complex
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    xmax: '2'
-    xmin: '-2'
-    ymax: '2'
-    ymin: '-2'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [881, 479]
-    rotation: 0
-    state: disabled
-- name: qtgui_const_sink_x_0_0
-  id: qtgui_const_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: '"blue"'
-    color10: '"red"'
-    color2: '"red"'
-    color3: '"red"'
-    color4: '"red"'
-    color5: '"red"'
-    color6: '"red"'
-    color7: '"red"'
-    color8: '"red"'
-    color9: '"red"'
-    comment: ''
-    grid: 'False'
-    gui_hint: 4,0,1,1
-    label1: '''.'''
-    label10: ''
-    label2: ''
-    label3: ''
-    label4: ''
-    label5: ''
-    label6: ''
-    label7: ''
-    label8: ''
-    label9: ''
-    legend: 'True'
-    marker1: '0'
-    marker10: '0'
-    marker2: '0'
-    marker3: '0'
-    marker4: '0'
-    marker5: '0'
-    marker6: '0'
-    marker7: '0'
-    marker8: '0'
-    marker9: '0'
-    name: ''
-    nconnections: '1'
-    size: '8'
-    style1: '0'
-    style10: '0'
-    style2: '0'
-    style3: '0'
-    style4: '0'
-    style5: '0'
-    style6: '0'
-    style7: '0'
-    style8: '0'
-    style9: '0'
-    tr_chan: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: complex
-    update_time: Tupdate
-    width1: '4'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    xmax: '1.5'
-    xmin: '-1.5'
-    ymax: '1.5'
-    ymin: '-1.5'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [889, 553]
-    rotation: 0
-    state: enabled
 - name: qtgui_time_sink_x_0_0_0
   id: qtgui_time_sink_x
   parameters:
@@ -1050,8 +866,6 @@ connections:
 - [blocks_multiply_const_vxx_0_0_0_1_0_0, '0', blocks_add_xx_0, '0']
 - [blocks_throttle_0, '0', vs, '0']
 - [e_VCO_fase_fc_0, '0', blocks_throttle_0, '0']
-- [e_VCO_fase_fc_0, '0', qtgui_const_sink_x_0, '0']
-- [e_VCO_fase_fc_0, '0', qtgui_const_sink_x_0_0, '0']
 - [epy_block_0, '0', blocks_multiply_const_vxx_0_0_0_1_0_0, '0']
 - [vso, '0', blocks_complex_to_float_0, '0']
 - [vso_0, '0', qtgui_time_sink_x_0_0_0, '1']
